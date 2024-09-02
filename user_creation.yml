@@ -1,0 +1,15 @@
+---
+- hosts: module1
+  become: true
+  tasks:
+    - name: Create database user with password and all database privileges and 'WITH GRANT OPTION'
+      community.mysql.mysql_user:
+        login_user: '{{ u }}'
+        login_password: '{{ p }}'
+        name: bobo1
+        password: bobo1
+        priv: '*.*:ALL,GRANT'
+        state: present
+        session_vars:
+          wsrep_on: off
+

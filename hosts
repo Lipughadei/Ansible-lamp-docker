@@ -1,0 +1,5 @@
+[module1]
+13.233.34.182 ansible_user=ubuntu
+
+#[module2]
+#3.109.210.100 ansible_user=ec2-user ansible_private_key_file=where is your pem file of that server

@@ -1,0 +1,5 @@
+---
+- hosts: module1
+  become: true
+  roles:
+    - bsmeding.docker

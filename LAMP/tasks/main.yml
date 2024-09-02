@@ -1,0 +1,81 @@
+---
+# tasks file for LAMP
+- name: Install Apache2
+  yum: 
+    name: apache2
+    state: present
+- name: starting apache2
+  service:
+    name: apache2
+    enabled: true
+    state: started
+- name: Install MariaDB
+  yum:
+    name: mariadb-server
+    state: present
+- name: Start and enable MariaDB
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+- name: Install pip
+  yum:
+    name: pip
+    state: present
+- pip:
+    name: pymysql
+- name: Create database user with password and all database privileges and 'WITH GRANT OPTION'
+  community.mysql.mysql_user:
+    login_user: '{{ u }}'
+    login_password: '{{ p }}'
+    name: bobo
+    password: 123456
+    priv: '*.*:ALL,GRANT'
+    state: present 
+- name: Grant privileges to root user
+  mysql_user:
+    user: mysql
+    login_user: '{{ u }}'
+    login_password: '{{ p }}'
+    host: '{{ h }}' 
+    priv: "*.*:ALL,GRANT"
+    state: present 
+- name: Configure MariaDB to listen on all interfaces
+  lineinfile:
+    dest: /etc/mysql/mariadb.conf.d/50-server.cnf
+    regexp: '^bind-address'
+    line: 'bind-address = 0.0.0.0'
+    state: present
+- name: installing php
+  yum:
+    name: php8.1-mysqli
+    state: present
+- name: install phpmyadmin
+  get_url: 
+    url: https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-english.zip
+    dest: /var/www/html
+- name: installing unzip
+  yum:
+    name: unzip
+    state: present
+- name: unziping the file
+  unarchive:
+    src: /var/www/html/phpMyAdmin-5.2.1-english.zip
+    dest: /var/www/html/
+    remote_src: yes
+- name: remove
+  shell:
+    chdir: /var/www/html/
+    cmd: rm -rf phpMyAdmin-5.2.1-english
+- name: removing the zip file which i have downloaded
+  shell:
+    chdir: /var/www/html/
+    cmd: rm -rf phpMyAdmin-5.2.1-english.zip
+- name: Restart MariaDB
+  service:
+    name: mariadb
+    state: restarted
+- name: restart httpd
+  service:
+    name: apache2 
+    state: restarted
