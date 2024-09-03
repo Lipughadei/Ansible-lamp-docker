@@ -1,12 +1,12 @@
 ---
 # tasks file for LAMP
-- name: Install Apache2
+- name: Install httpd
   yum: 
-    name: apache2
+    name: httpd
     state: present
-- name: starting apache2
+- name: starting httpd
   service:
-    name: apache2
+    name: httpd
     enabled: true
     state: started
 - name: Install MariaDB
@@ -25,31 +25,31 @@
 - pip:
     name: pymysql
 - name: Create database user with password and all database privileges and 'WITH GRANT OPTION'
-  community.mysql.mysql_user:
+  mysql_user:
     login_user: '{{ u }}'
     login_password: '{{ p }}'
-    name: bobo
-    password: 123456
+    name: root 
+    password: root
     priv: '*.*:ALL,GRANT'
     state: present 
 - name: Grant privileges to root user
   mysql_user:
-    user: mysql
-    login_user: '{{ u }}'
-    login_password: '{{ p }}'
-    host: '{{ h }}' 
-    priv: "*.*:ALL,GRANT"
+    login_user: root
+    login_password: root
+      #host: '{{ h }}'
+    name: lipu
+    password: lipu 
+    priv: "*.*:ALL"
     state: present 
 - name: Configure MariaDB to listen on all interfaces
   lineinfile:
-    dest: /etc/mysql/mariadb.conf.d/50-server.cnf
+    dest: /etc/my.cnf 
     regexp: '^bind-address'
     line: 'bind-address = 0.0.0.0'
     state: present
-- name: installing php
-  yum:
-    name: php8.1-mysqli
-    state: present
+- name: Enable PHP 8.1 repository
+  shell:
+    cmd: amazon-linux-extras install php8.2 -y
 - name: install phpmyadmin
   get_url: 
     url: https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-english.zip
@@ -77,5 +77,5 @@
     state: restarted
 - name: restart httpd
   service:
-    name: apache2 
+    name: httpd 
     state: restarted

@@ -1,5 +1,5 @@
 ---
-- hosts: module1
+- hosts: module2
   become: true
   roles:
     - LAMP
