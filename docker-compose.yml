@@ -1,0 +1,29 @@
+---
+version: "3"
+services:
+  db:
+      build:
+        dockerfile: Dockermysql
+      ports:
+        - "3306:3306"
+  ui1:
+    build:
+      dockerfile: Dockerphp
+    ports:
+      - "80:80"
+    links:
+      - db:db
+  ui2:
+    build:
+      dockerfile: Dockerphp
+    ports:
+      - "82:80"
+    links:
+      - db:db
+  ui3:
+    build:
+      dockerfile: Dockerphp
+    ports:
+      - "83:80"
+    links:
+      - db:db
