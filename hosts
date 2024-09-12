@@ -1,5 +1,0 @@
-#[module1]
-#13.233.34.182 ansible_user=ubuntu
-
-[module2]
-15.206.210.36 ansible_user=ec2-user ansible_private_key_file=/etc/ansible/.secret/manage_node1.pem
