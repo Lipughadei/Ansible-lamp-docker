@@ -1,11 +1,15 @@
 ---
-version: "3"
+#version: "3"
 services:
   db:
       build:
         dockerfile: Dockermysql
       ports:
         - "3306:3306"
+      environment:
+        - MYSQL_DATABASE=test
+      volumes:
+        - ./dump:/docker-entrypoint-initdb.d
   ui1:
     build:
       dockerfile: Dockerphp
