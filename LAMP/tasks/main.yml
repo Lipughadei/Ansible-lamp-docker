@@ -63,10 +63,10 @@
     src: /var/www/html/phpMyAdmin-5.2.1-english.zip
     dest: /var/www/html/
     remote_src: yes
-- name: remove
+- name: renaming
   shell:
     chdir: /var/www/html/
-    cmd: rm -rf phpMyAdmin-5.2.1-english
+    cmd: mv phpMyAdmin-5.2.1-english phpMyAdmin
 - name: removing the zip file which i have downloaded
   shell:
     chdir: /var/www/html/
