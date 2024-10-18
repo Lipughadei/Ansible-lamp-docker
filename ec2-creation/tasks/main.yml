@@ -1,17 +1,21 @@
 ---
-# tasks file for ec2-creation
-- name: start an instance with a public IP address
-  amazon.aws.ec2_instance:
-    name: "ansible-instance"
-    # key_name: "prod-ssh-key"
-    # vpc_subnet_id: subnet-013744e41e8088axx
-    instance_type: t2.micro
-    security_group: default
-    region: us-east-1
-    aws_access_key: "{{ec2_access_key}}"  # From vault as defined
-    aws_secret_key: "{{ec2_secret_key}}"  # From vault as defined      
-    network:
-      assign_public_ip: true
-    image_id: ami-04b70fa74e45c3917
-    tags:
-      Environment: Testing
+- name: Create an EC2 instance
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Launch EC2 instance
+      ec2:
+        key_name: jenkins1
+        instance_type: t2.micro
+        image: ami-0e0e417dfa2028266 # Example AMI ID
+        region: ap-south-1
+        wait: yes
+        count: 1
+        vpc_subnet_id: subnet-00d4449399bba6d92 # Replace with your subnet ID
+        assign_public_ip: yes
+        group: Hello  # Replace with your security group
+      register: ec2
+
+    - name: Output instance details
+      debug:
+        var: ec2
