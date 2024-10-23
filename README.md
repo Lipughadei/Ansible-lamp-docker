@@ -17,6 +17,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 If you encounter any login issue then check for the images and remove previous images then again try to login once again.
 
-==========================================================================================================================================================================================
+========================================================================================================================================================================================
 
 The docker system prune command is a shortcut that prunes images, containers, and networks. Volumes aren't pruned by default, and you must specify the --volumes flag for docker system prune to prune volumes. By default, you're prompted to continue. To bypass the prompt, use the -f or --force flag.
