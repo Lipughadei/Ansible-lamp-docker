@@ -14,11 +14,6 @@ In your Jenkins pipeline script, you can set these environment variables using t
 
 groovy
 
-Verify
-
-Open In Editor
-Edit
-Copy code
 pipeline {
     agent any
     stages {
@@ -44,11 +39,6 @@ In your Terraform configuration file (e.g., main.tf), you can specify the AWS pr
 
 hcl
 
-Verify
-
-Open In Editor
-Edit
-Copy code
 provider "aws" {
   region = "us-east-1"  # Specify your region
 }
@@ -69,11 +59,6 @@ Docker volumes are the preferred way to persist data in containers. You can crea
 
 bash
 
-Verify
-
-Open In Editor
-Edit
-Copy code
 docker run -d --name my-container -v /path/to/host/directory:/path/to/container/directory my-image
 In this example, /path/to/host/directory is the directory on the host machine, and /path/to/container/directory is the directory inside the container where the volume will be mounted.
 
@@ -81,11 +66,6 @@ You can also use the docker volume create command to create a named volume and t
 
 bash
 
-Verify
-
-Open In Editor
-Edit
-Copy code
 docker volume create my-volume
 docker run -d --name my-container -v my-volume:/path/to/container/directory my-image
 2. Using Bind Mounts
@@ -93,22 +73,12 @@ Bind mounts are similar to volumes, but they are not managed by Docker. You can 
 
 bash
 
-Verify
-
-Open In Editor
-Edit
-Copy code
 docker run -d --name my-container --mount type=bind,source=/path/to/host/directory,target=/path/to/container/directory my-image
 3. Using Docker Compose
 If you're using Docker Compose, you can define volumes in the docker-compose.yml file.
 
 yml
 
-Verify
-
-Open In Editor
-Edit
-Copy code
 version: '3'
 services:
   my-service:
@@ -124,11 +94,6 @@ For example, you can use the --storage-opt flag to set the size of the storage f
 
 bash
 
-Verify
-
-Open In Editor
-Edit
-Copy code
 docker run -d --name my-container --storage-opt size=10G my-image
 Summary
 Use volumes to persist data in containers.
@@ -149,20 +114,10 @@ Docker volumes are a great way to allocate storage, as they are managed by Docke
 Create a Volume: You can create a Docker volume before running the container.
 bash
 
-Verify
-
-Open In Editor
-Edit
-Copy code
 docker volume create my-volume
 Run a Container with the Volume: When you create the container, you can allocate the volume to it.
 bash
 
-Verify
-
-Open In Editor
-Edit
-Copy code
 docker run -d --name my-container -v my-volume:/path/to/container/directory my-image
 2. Using Bind Mounts
 Bind mounts allow you to specify an exact path on the host machine to allocate storage.
@@ -170,22 +125,12 @@ Bind mounts allow you to specify an exact path on the host machine to allocate s
 Run a Container with a Bind Mount: Specify the host directory you want to mount.
 bash
 
-Verify
-
-Open In Editor
-Edit
-Copy code
 docker run -d --name my-container --mount type=bind,source=/path/to/host/directory,target=/path/to/container/directory my-image
 3. Using Docker Compose
 If you're using Docker Compose, you can define the storage allocation in the docker-compose.yml file.
 
 yml
 
-Verify
-
-Open In Editor
-Edit
-Copy code
 version: '3'
 services:
   my-service:
@@ -202,11 +147,6 @@ You can also specify storage options during container creation, although this is
 
 bash
 
-Verify
-
-Open In Editor
-Edit
-Copy code
 docker run -d --name my-container --storage-opt size=10G my-image
 Summary
 Volumes: Use Docker-managed volumes for easy data persistence.
