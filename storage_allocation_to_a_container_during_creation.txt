@@ -1,4 +1,4 @@
-where can i configure the aws credential in a terraform file i hava already created aws credential in jenkins global credential section
+where can i configure the aws credential in a terraform file i hava already created through aws credential plugin in jenkins global credential section.
 
 
 To configure AWS credentials in a Terraform file when you have already set up AWS credentials in Jenkins, you can follow these steps:
