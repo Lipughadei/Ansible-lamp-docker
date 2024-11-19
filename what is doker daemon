@@ -1,0 +1,3 @@
+The Docker daemon is a background program that runs on your computer or server and manages Docker containers.
+You can think of it as the "worker" that does all the tasks related to creating, running, and managing containers when you give it commands through the Docker client.
+It handles everything needed to keep your applications running in isolated environments called containers.
