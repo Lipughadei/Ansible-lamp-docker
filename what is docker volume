@@ -1,0 +1,12 @@
+-> A Docker volume is a way to store data that your containers can use. In simple terms, think of it as a special storage space that exists outside of your containers.
+
+-> Here are the key points about Docker volumes:
+
+-> Persistent Storage: Unlike the data inside a container, which is lost when the container is deleted,
+   data stored in a volume remains even if the container is removed. This is useful for keeping important data safe.
+
+-> Sharing Data: Volumes can be shared between multiple containers, making it easy for them to access the same data.
+
+-> Easy Management: Docker provides commands to create, manage, and delete volumes, making it simple to handle your data storage needs.
+
+-> In summary, Docker volumes help you manage and keep your data safe while using containers.
