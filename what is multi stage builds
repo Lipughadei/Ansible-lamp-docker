@@ -1,0 +1,115 @@
+What is a Multi-Stage Build?
+Imagine you're baking a cake. You need a lot of ingredients and tools to bake it, but once the cake is done, you only need the cake itself for serving.
+Multi-stage builds in Docker work similarly: you can have one stage where you prepare and build your application (like baking the cake)
+and another stage where you only keep what you need to run the application (like just having the cake ready to serve).
+
+Simple Example
+Let’s say you have a simple Node.js application. Here’s how you could set up a multi-stage build in a Dockerfile.
+
+Step 1: Create a Simple Node.js App
+First, let's assume you have a simple Node.js app with the following structure:
+
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+my-app/
+├── app.js
+└── package.json
+app.js:
+
+javascript
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+const http = require('http');
+
+const hostname = '127.0.0.1';
+const port = 3000;
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World\n');
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+package.json:
+
+json
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
+Step 2: Create a Dockerfile with Multi-Stage Build
+Here’s how you can write a Dockerfile that uses multi-stage builds:
+
+dockerfile
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+# Stage 1: Build the application
+FROM node:14 AS builder
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and install dependencies
+COPY package.json ./
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Stage 2: Create a minimal runtime image
+FROM node:14-alpine
+
+# Set the working directory
+WORKDIR /app
+
+# Copy only the necessary files from the builder stage
+COPY --from=builder /app .
+
+# Command to run the application
+CMD ["node", "app.js"]
+Breakdown of the Dockerfile:
+Stage 1 (Builder):
+
+FROM node:14 AS builder: This uses the full Node.js image to build the application.
+WORKDIR /app: Sets the working directory inside the container.
+COPY package.json ./: Copies the package.json file to the container.
+RUN npm install: Installs the dependencies needed to run the app.
+COPY . .: Copies the rest of the application code into the container.
+Stage 2 (Runtime):
+
+FROM node:14-alpine: This uses a smaller version of Node.js (Alpine) for the final image, which is more lightweight.
+WORKDIR /app: Sets the working directory again.
+COPY --from=builder /app .: Copies everything from the first stage (the built app) into this new image.
+CMD ["node", "app.js"]: This is the command that runs the application when the container starts.
+Why Use Multi-Stage Builds?
+Smaller Image Size: The final image only contains what’s needed to run the app, not the build tools or unnecessary files.
+Faster Deployments: Since the final image is smaller, it takes less time to transfer and start.
+Cleaner Environment: You don’t have extra files or tools that you don’t need in your production environment.
+Conclusion
+Multi-stage builds help you create efficient and clean Docker images by separating the build process from the runtime environment.
+This way, you only keep what’s necessary for running your application, making it faster and more secure.
