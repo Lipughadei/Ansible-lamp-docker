@@ -1,0 +1,9 @@
+In the context of container orchestration, particularly with Kubernetes, a "pod" is the smallest deployable unit and can contain one or more containers.
+
+Single-container Pod: The most common use case is a pod that contains a single container. This is straightforward and is often used for simple applications.
+
+Multi-container Pod: A pod can also contain multiple containers that are tightly coupled and need to work together.
+                     These containers share the same network namespace (meaning they can communicate with each other via localhost) and can also share storage volumes.
+                     This is useful for scenarios like sidecar containers, where one container provides a supporting function to the main application container (e.g., logging, monitoring, or proxying).
+
+In summary, yes, a pod can contain multiple containers, but it can also contain just one. The design choice depends on the specific use case and requirements of the application being deployed.
