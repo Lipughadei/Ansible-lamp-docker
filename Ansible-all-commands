@@ -1,0 +1,53 @@
+Ansible commands can be categorized into several key utilities, each serving different purposes:
+
+ansible: Executes ad-hoc commands on managed nodes.
+
+ansible-playbook: Runs playbooks, which are YAML files defining a series of tasks.
+
+ansible -galaxy: Manages roles and collections from Ansible Galaxy.
+
+ansible-vault: Manages sensitive data by encrypting files and strings.
+
+ansible-doc: Displays documentation for Ansible modules and playbooks.
+
+ansible-inventory: Manages and displays inventory information.
+
+ansible-navigator: Provides a command-line interface for navigating Ansible resources.
+
+ansible-pull: Pulls playbooks from a remote repository and executes them on the local machine.
+
+ansible-console: Provides an interactive console for executing Ansible commands.
+
+ansible-galaxy collection: Manages collections of roles and modules.
+
+ansible-galaxy role: Manages roles specifically.
+
+ansible-playbook --check: Performs a dry run of the playbook without making changes.
+
+ansible-playbook --syntax-check: Checks the syntax of the playbook.
+
+ansible all -m ping: Pings all hosts in the inventory to check connectivity.
+
+ansible all -m copy -a "src=file.txt dest=dest.txt": Copies a file to all hosts.
+
+ansible all -m service -a "name=<service_name> state=restarted": Restarts a service on all hosts.
+
+ansible all -m shell -a "<command>": Executes a shell command on all hosts.
+
+ansible all -m setup: Gathers facts from all hosts.
+
+ansible-galaxy collection install <collection_name>: Installs a specific collection from Ansible Galaxy.
+
+ansible-vault encrypt <file.yml>: Encrypts a file using Ansible Vault.
+
+ansible-vault decrypt <file.yml>: Decrypts an encrypted file.
+
+ansible-vault edit <file.yml>: Edits an encrypted file.
+
+ansible-vault view <file.yml>: Views the contents of an encrypted file.
+
+ansible-galaxy role install <role_name>: Installs a specific role from Ansible Galaxy.
+
+ansible-galaxy role list: Lists all installed roles.
+
+These commands provide a comprehensive toolkit for managing configurations, deploying applications, and automating tasks across various environments using Ansible.
