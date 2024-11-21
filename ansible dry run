@@ -1,0 +1,1 @@
+-> ansible-playbook --check playbook.yaml (it will check and tell what are the changes are going to happen without changing the systems)
