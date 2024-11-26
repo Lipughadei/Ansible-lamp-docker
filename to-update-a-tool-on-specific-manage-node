@@ -1,0 +1,1 @@
+ansible 192.168.1.10 -i inventory_file -m package -a "name=git state=latest" --become
