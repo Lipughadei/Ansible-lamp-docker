@@ -1,0 +1,245 @@
+Sure! Below is a comprehensive list of common Git commands, their use cases, and examples. This list covers basic to intermediate functionalities that should be helpful for most users.
+
+Basic Commands
+git init
+
+Use Case: Initialize a new Git repository.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git init my-repo
+git clone
+
+Use Case: Clone an existing repository.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git clone https://github.com/user/repo.git
+git status
+
+Use Case: Check the status of your working directory and staging area.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git status
+git add
+
+Use Case: Stage changes for the next commit.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git add file.txt
+git add .  # Stages all changes
+git commit
+
+Use Case: Commit staged changes to the repository.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git commit -m "Commit message"
+git log
+
+Use Case: View the commit history.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git log
+git diff
+
+Use Case: Show changes between commits, commit and working tree, etc.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git diff          # Changes in working directory
+git diff HEAD     # Changes since last commit
+Branching and Merging
+git branch
+
+Use Case: List, create, or delete branches.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git branch        # List branches
+git branch new-feature  # Create a new branch
+git branch -d old-branch  # Delete a branch
+git checkout
+
+Use Case: Switch branches or restore working tree files.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git checkout new-feature  # Switch to a branch
+git checkout -b new-feature  # Create and switch to a new branch
+git merge
+
+Use Case: Merge changes from one branch into another.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git checkout main
+git merge new-feature
+git rebase
+
+Use Case: Reapply commits on top of another base tip.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git checkout feature
+git rebase main
+Remote Repositories
+git remote
+
+Use Case: Manage remote repositories.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git remote -v         # List remote repositories
+git remote add origin https://github.com/user/repo.git  # Add a remote
+git push
+
+Use Case: Upload local changes to a remote repository.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git push origin main  # Push changes to main branch
+git pull
+
+Use Case: Fetch and merge changes from the remote repository.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git pull origin main
+git fetch
+
+Use Case: Download objects and refs from another repository.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git fetch origin
+Undoing Changes
+git reset
+
+Use Case: Reset current HEAD to a specified state.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git reset --soft HEAD~1  # Undo last commit but keep changes staged
+git reset HEAD~1         # Undo last commit and unstage changes
+git revert
+
+Use Case: Create a new commit that undoes the changes made in a previous commit.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git revert <commit-hash>
+git stash
+
+Use Case: Stash changes in a dirty working directory.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git stash              # Stash changes
+git stash pop          # Apply stashed changes
+Tagging
+git tag
+Use Case: Create, list, delete or verify a tag.
+Example:
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+git tag v1.0                     # Create a tag
+git tag -a v1.
