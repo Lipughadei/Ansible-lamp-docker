@@ -1,0 +1,4 @@
+-> ansible -m shell -a "mkdir list" webapps (it is to create a directory in manage node)
+-> ansible -m shell -a "sudo rm -rf list" webapps (it is to remove the directory from manage node)
+-> ansible -m copy -a "src=/etc/ansible/.secret/testserver.pem dest=/home/ec2-user/list" webapps  (it is used to copy file from manage node to control node)
+-> ansible -m fetch -a "src=/home/ec2-user/list/testserver.pem dest=/etc/ansible/ flat=yes" webapps (it is used to fetch the file from manage node to control node)
