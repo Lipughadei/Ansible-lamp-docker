@@ -1,0 +1,73 @@
+When troubleshooting Docker issues, it's helpful to have a structured approach. Below are some common troubleshooting questions that can guide you through diagnosing and resolving various Docker-related problems:
+
+General Docker Troubleshooting Questions
+Is Docker Installed and Running?
+
+Is the Docker service running? (Check with systemctl status docker or service docker status.)
+Is Docker installed correctly? (Check with docker --version.)
+Are You Using the Correct Docker Command?
+
+Are you using the correct syntax for the Docker command?
+Are you specifying the right options and arguments?
+What is the Status of the Docker Daemon?
+
+Is the Docker daemon running without errors? (Check logs with journalctl -u docker.service or docker logs <container_id>.)
+Are Containers Running as Expected?
+
+What is the status of your containers? (Check with docker ps -a.)
+Are the containers restarting or exiting unexpectedly? (Check the exit code with docker inspect <container_id>.)
+Are There Any Resource Constraints?
+
+Are you running out of disk space? (Check with docker system df.)
+Is there sufficient memory and CPU available for Docker?
+Are You Facing Network Issues?
+
+Can you ping other containers or services from within a container? (Use docker exec -it <container_id> ping <target>.)
+Are the correct ports exposed and mapped? (Check with docker ps and docker inspect <container_id>.)
+Are Volumes and Bind Mounts Configured Correctly?
+
+Are the volumes mounted correctly? (Check with docker inspect <container_id>.)
+Are you able to access data in mounted volumes?
+Is the Docker Image Correct?
+
+Is the Docker image built successfully? (Check with docker images and docker build logs.)
+Are you using the correct image tag? (Verify the image name and version.)
+Are Environment Variables Set Correctly?
+
+Are the necessary environment variables passed to the container? (Check with docker inspect <container_id>.)
+Are You Getting Permission Denied Errors?
+
+Are you running Docker commands with sufficient privileges? (You may need to use sudo or add your user to the Docker group.)
+Are file permissions correct for mounted volumes?
+Container-Specific Troubleshooting Questions
+Why is My Container Exiting Immediately?
+
+What is the exit code of the container? (Check with docker inspect <container_id>.)
+Are there any errors in the application logs? (Use docker logs <container_id>.)
+Why is My Application Not Accessible?
+
+Are the correct ports exposed? (Check with docker ps.)
+Is there a firewall blocking access to the application?
+How to Debug a Container?
+
+Can you access the shell of the container for debugging? (Use docker exec -it <container_id> /bin/sh or /bin/bash.)
+Are there any logs available for the application running inside the container?
+Image-Specific Troubleshooting Questions
+Why is My Image Not Building?
+
+Are there any errors in the build process? (Check the output of docker build.)
+Are all dependencies specified correctly in the Dockerfile?
+How to Clean Up Unused Docker Resources?
+
+Are there dangling images, stopped containers, or unused volumes? (Use docker system prune to clean them up.)
+Network-Specific Troubleshooting Questions
+Why Can't Containers Communicate with Each Other?
+
+Are the containers on the same network? (Check with docker network ls and docker inspect <network_name>.)
+Are the necessary network settings configured correctly?
+How to Diagnose Network Issues?
+
+Can you perform a DNS lookup inside the container? (Use docker exec -it <container_id> nslookup <service>.)
+Are you using the correct network driver for your use case?
+Conclusion
+These questions can help you systematically troubleshoot common Docker issues. Depending on the specific problem you are facing, you may need to adapt the questions or delve deeper into particular areas. Always refer to Docker's official documentation and community forums for additional guidance and support.
