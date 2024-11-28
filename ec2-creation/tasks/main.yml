@@ -19,3 +19,5 @@
     - name: Output instance details
       debug:
         var: ec2
+
+#YOU NEED TO INSTALL BOTO THEN ONLY IT CAN WORK OTHERWISE IT WILL THROW ERROR fatal: [localhost]: FAILED! => {"changed": false, "msg": "boto required for this module"}
