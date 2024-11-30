@@ -3,8 +3,8 @@
   hosts: localhost
   gather_facts: no
   tasks:
-    - name: Launch EC2 instance
-      ec2:
+    - name: Launch EC2 instance                                         #INSTALL BOTO FIRST    
+      ec2:                                                              #pip install boto
         key_name: jenkins1
         instance_type: t2.micro
         image: ami-0e0e417dfa2028266
