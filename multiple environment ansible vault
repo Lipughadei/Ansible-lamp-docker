@@ -1,0 +1,1 @@
+ansible-playbook site.yml --vault-id dev@prompt --vault-id prod@~/.vault_pass_prod.txt
