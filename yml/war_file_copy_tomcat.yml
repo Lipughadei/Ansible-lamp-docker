@@ -1,0 +1,12 @@
+---
+- name: copy war file
+  hosts: testserver
+  become: true
+  tasks:
+    - name: copy file from ansible to tomcat server
+      copy:
+        src: /etc/ansible/java-tomcat-maven-example.war
+        dest: /opt/tomcat/webapps
+        owner: root
+        group: root
+        mode: 0644
