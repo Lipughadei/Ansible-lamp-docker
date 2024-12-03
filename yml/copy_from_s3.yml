@@ -1,1 +1,28 @@
+---
+- name: Copy WAR file from AWS S3 to Ansible server
+  hosts: localhost  # Change this to your Ansible server's inventory group if needed
+  gather_facts: no
+  vars_files:
+    - vars.yml  # Ensure this file contains aws_access_key and aws_secret_key
 
+  tasks:
+    - name: Download WAR file from S3
+      aws_s3:
+        bucket: bucket002534
+        object: artifactory/java-tomcat-maven-example.war  # Path to the WAR file in S3 (no need for bucket name in the object path)
+        dest: /etc/ansible/java-tomcat-maven-example.war  # Specify the full destination path with filename
+        mode: get
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        region: ap-south-1  # Specify the region if needed
+      register: s3_download
+
+    - name: Check if the download was successful
+      debug:
+        msg: "WAR file downloaded successfully"
+      when: s3_download is not failed
+
+    - name: Fail the play if the download failed
+      fail:
+        msg: "Failed to download WAR file from S3"
+      when: s3_download is failed
