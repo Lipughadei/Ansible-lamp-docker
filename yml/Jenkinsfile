@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    
+    tools {
+        maven 'M2_HOME'
+    }
+    
+    stages{
+        stage('git checkout') {
+            steps {
+                git 'https://github.com/daticahealth/java-tomcat-maven-example.git'
+            }
+        }
+        stage('build') {
+            steps {
+                script {
+                    sh 'whoami'
+                    sh 'mvn clean package'
+                }    
+            }
+        }
+        stage('pushing it to s3 bucket') {
+            steps {
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-credential', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    sh 'aws s3 ls'
+                    sh 'aws s3 cp target/*.war s3://bucket002534/artifactory/'
+                }
+            }
+        }
+        stage('here comes ansible server') {
+            agent {
+                label 'agent1'
+            }
+            steps {
+                //sh 'cd /etc/ansible'
+                sh 'ansible -m ping all'
+                sh 'ansible-playbook /etc/ansible/copy_from_s3.yml'
+                sh 'sleep 5'
+                sh 'ansible-playbook /etc/ansible/war_file_copy_tomcat.yml'
+            }
+        } 
+    }
+}
