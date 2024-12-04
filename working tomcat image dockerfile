@@ -1,0 +1,13 @@
+# Use the official Tomcat image as a base
+FROM tomcat:8.0
+
+# Set the working directory
+WORKDIR /usr/local/tomcat/webapps
+
+# Copy the WAR file from the local machine to the Tomcat webapps directory
+COPY java-tomcat-maven-example.war java-tomcat-maven-example.war
+
+# Expose the port that Tomcat runs on (default is 8080)
+EXPOSE 8080
+
+# The default command to run Tomcat is already defined in the base image
