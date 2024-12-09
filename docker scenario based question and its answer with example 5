@@ -1,0 +1,28 @@
+Scenario 4: Scaling Applications
+Question: You need to scale your web application to handle increased traffic. How can you achieve this using Docker?
+
+Answer: You can use Docker Compose or Docker Swarm to scale your application by running multiple instances of your container.
+
+Example using Docker Compose:
+
+Create a docker-compose.yml file:
+
+yaml
+
+Verify
+Copy code
+version: '3'
+services:
+  web:
+    image: my-node-app
+    deploy:
+      replicas: 3
+    ports:
+      - "3000:3000"
+Deploy the application:
+
+bash
+
+Verify
+Copy code
+docker-compose up --scale web=3
