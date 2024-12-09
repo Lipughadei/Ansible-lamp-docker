@@ -1,0 +1,36 @@
+Certainly! Here are some scenario-based questions related to Docker, along with their answers and examples.
+
+Scenario 1: Container Isolation
+Question: You have a web application that requires a specific version of Node.js. How can you ensure that this application runs in isolation without affecting other applications on the same host?
+
+Answer: You can create a Docker container that includes the specific version of Node.js required by your application.
+By using Docker, you can package your application along with its dependencies, ensuring that it runs in isolation from other applications.
+
+Example:
+
+Create a Dockerfile for your Node.js application:
+
+Dockerfile
+
+Verify
+Copy code
+FROM node:14  # Use a specific version of Node.js
+WORKDIR /app
+COPY package.json ./
+RUN npm install
+COPY . .
+CMD ["node", "app.js"]
+Build the Docker image:
+
+bash
+
+Verify
+Copy code
+docker build -t my-node-app .
+Run the container:
+
+bash
+
+Verify
+Copy code
+docker run -d -p 3000:3000 my-node-app
