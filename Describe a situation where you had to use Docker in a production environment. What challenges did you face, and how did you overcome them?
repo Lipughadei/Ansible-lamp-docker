@@ -7,8 +7,8 @@ Context: A company decides to deploy a new microservices-based web application u
          The goal is to improve deployment speed, scalability, and resource utilization.
 
 Challenges Faced
-Container Orchestration Complexity
 
+Container Orchestration Complexity
 Challenge: Managing multiple containers for different services and ensuring they communicate effectively can become complex,
            especially as the number of services grows.
 Solution: Implement a container orchestration platform like Kubernetes or Docker Swarm. This allows for automated deployment, scaling,and management
