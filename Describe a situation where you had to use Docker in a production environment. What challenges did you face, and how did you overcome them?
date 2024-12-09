@@ -3,8 +3,8 @@ along with potential challenges and solutions that one might encounter.
 
 Hypothetical Scenario: Deploying a Microservices Application
 Context: A company decides to deploy a new microservices-based web application using Docker.
-The application consists of multiple services (e.g., user service, product service, order service) that communicate with each other.
-The goal is to improve deployment speed, scalability, and resource utilization.
+         The application consists of multiple services (e.g., user service, product service, order service) that communicate with each other.
+         The goal is to improve deployment speed, scalability, and resource utilization.
 
 Challenges Faced
 Container Orchestration Complexity
