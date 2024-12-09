@@ -1,0 +1,23 @@
+Scenario 3: Networking
+Question: You have multiple containers that need to communicate with each other. How can you set up networking between these containers?
+
+Answer: You can create a user-defined bridge network in Docker, which allows containers to communicate with each other using their container names as hostnames.
+
+Example:
+
+Create a network:
+
+bash
+
+Verify
+Copy code
+docker network create my-network
+Run two containers on the same network:
+
+bash
+
+Verify
+Copy code
+docker run -d --name web-app --network my-network my-node-app
+docker run -d --name db --network my-network my-database-image
+The web-app container can communicate with the db container using the hostname db.
