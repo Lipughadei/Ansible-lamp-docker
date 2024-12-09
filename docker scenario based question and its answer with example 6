@@ -1,0 +1,39 @@
+Scenario 5: CI/CD Integration
+Question: How can you integrate Docker into your CI/CD pipeline to automate the deployment of your application?
+
+Answer: You can use Docker in your CI/CD pipeline to build images, run tests, and deploy containers automatically. Most CI/CD tools (like Jenkins, GitLab CI, GitHub Actions) support Docker natively.
+
+Example using GitHub Actions:
+
+Create a .github/workflows/docker.yml file:
+yaml
+
+Verify
+Copy code
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t my-node-app .
+
+      - name: Run tests
+        run: docker run my-node-app npm test
+
+      - name: Push Docker image
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          docker tag my-node-app my-docker-repo/my-node-app:latest
+          docker push my-docker-repo/my-node-app:latest
+These scenarios cover various aspects of Docker, including isolation, data persistence, networking, scaling, and CI/CD integration.
+Each example provides a practical approach to solving common challenges when working with Docker.
