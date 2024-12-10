@@ -1,0 +1,34 @@
+In Docker, containers can communicate with each other based on the network configuration. When you have two containers connected to different networks,
+they cannot communicate directly unless specific configurations are made. Here's how the scenario you described works:
+
+Default Bridge Network: The login container is connected to the default bridge network. This network allows containers to communicate with each other if they are on the same network,
+                        but it does not allow communication with containers on different networks by default.
+
+Custom Bridge Network: The payment container is connected to a custom bridge network. Similar to the default bridge network,
+                       containers on this custom network can communicate with each other, but they cannot communicate with containers on other networks unless explicitly configured.
+
+Communication Between Containers
+Since the login container and the payment container are on different networks, they cannot communicate directly. Here are a few ways to enable communication between them:
+
+Using Host Networking: If you run one of the containers with the host network mode, it can communicate with the other container using the host's network stack.
+                       However, this approach has its own implications and is generally not recommended for production environments.
+
+Docker Network Connect: You can connect one container to multiple networks. For example, you can connect the login container to the custom bridge network that the payment container is on.
+                        This can be done using the docker network connect command:
+
+bash
+
+Verify
+Copy code
+docker network connect <custom_bridge_network> <login_container_name>
+API Gateway or Reverse Proxy: You can set up an API gateway or a reverse proxy (like Nginx) that both containers can communicate with.
+The gateway can route requests from the login container to the payment container.
+
+Service Discovery: If you are using an orchestration tool like Docker Swarm or Kubernetes, you can leverage service discovery features to allow containers to communicate across different networks.
+
+Environment Variables or Configuration Files: You can pass the necessary connection details (like IP addresses or hostnames)
+                                              through environment variables or configuration files, but this requires that you know the IP addresses or hostnames of the containers.
+
+Conclusion
+In summary, the login and payment containers cannot communicate directly due to being on different Docker networks.
+You will need to implement one of the above methods to enable communication between them. The choice of method depends on your specific use case, architecture, and requirements.
