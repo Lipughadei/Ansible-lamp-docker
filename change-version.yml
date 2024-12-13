@@ -1,0 +1,41 @@
+=====================================================================
+#IT IS WORKING BUT YOU HAVE TO MANUALLY RESTART THE TOMCAT SERVER
+=====================================================================
+
+- name: Upgrade Tomcat from 9.0.98 to 10.1.34
+  hosts: all
+  become: true
+  tasks:
+    #    - name: Backup existing Tomcat installation
+    # command: cp -r /opt/tomcat9 /opt/apache-tomcat-9.0.98-backup
+
+    - name: Uninstall current Tomcat version
+      command: rm -rf /opt/tomcat9
+
+    - name: Download Tomcat 10.1.34
+      get_url:
+        url: "https://archive.apache.org/dist/tomcat/tomcat-10/v10.1.34/bin/apache-tomcat-10.1.34.tar.gz"
+        dest: /opt/
+
+    - name: Extract Tomcat
+      unarchive:
+        src: /opt/apache-tomcat-10.1.34.tar.gz
+        dest: /opt/
+        remote_src: yes
+
+          #- name: Migrate configuration files
+          #copy:
+          #src: /opt/apache-tomcat-9.0.98-backup/conf/server.xml
+          #dest: /opt/apache-tomcat-10.1.34/conf/server.xml
+          #remote_src: yes
+      # Note: You may need to manually edit the configuration files to ensure compatibility.
+
+          #- name: Stop Tomcat
+          #command: /opt/apache-tomcat-10.1.34/bin/shutdown.sh
+          #args:
+          #chdir: /opt/apache-tomcat-10.1.34/bin
+
+    - name: Start Tomcat
+      command: /opt/apache-tomcat-10.1.34/bin/startup.sh
+      args:
+        chdir: /opt/apache-tomcat-10.1.34/bin
