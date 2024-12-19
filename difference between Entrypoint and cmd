@@ -1,0 +1,63 @@
+In Docker, both ENTRYPOINT and CMD are instructions used in a Dockerfile to specify what command should be run when a container is started.
+However, they serve different purposes and have different behaviors. Here’s a breakdown of the differences:
+
+ENTRYPOINT
+Purpose: The ENTRYPOINT instruction is used to define the main command that will always be executed when the container starts. It is typically used to set up the container to run a specific application.
+
+Behavior: The command specified in ENTRYPOINT cannot be overridden at runtime (unless you use the --entrypoint flag with docker run). It is designed to be the primary command for the container.
+
+Syntax: You can specify ENTRYPOINT in two forms:
+
+Exec form (recommended): ENTRYPOINT ["executable", "param1", "param2"]
+Shell form: ENTRYPOINT command param1 param2 (this runs in a shell)
+Example:
+
+dockerfile
+
+Verify
+
+Open In Editor
+Run
+Copy code
+ENTRYPOINT ["python", "app.py"]
+CMD
+Purpose: The CMD instruction provides default arguments for the ENTRYPOINT or specifies a command to run when the container starts if no command is provided at runtime.
+
+Behavior: If you specify a command when running the container, it will override the CMD instruction. If ENTRYPOINT is also specified, the command in CMD will be passed as arguments to the ENTRYPOINT.
+
+Syntax: Similar to ENTRYPOINT, CMD can also be specified in two forms:
+
+Exec form: CMD ["param1", "param2"]
+Shell form: CMD command param1 param2
+Example:
+
+dockerfile
+
+Verify
+
+Open In Editor
+Run
+Copy code
+CMD ["--help"]
+Combined Usage
+You can use both ENTRYPOINT and CMD together in a Dockerfile. In this case, ENTRYPOINT defines the main command, and CMD provides default arguments to that command.
+
+Example:
+dockerfile
+
+Verify
+
+Open In Editor
+Run
+Copy code
+FROM python:3.8
+COPY app.py /app.py
+ENTRYPOINT ["python", "/app.py"]
+CMD ["--help"]
+In this example, when you run the container without any arguments, it will execute python /app.py --help.
+If you run the container with a different argument, like docker run myimage --version, it will execute python /app.py --version.
+
+Summary
+Use ENTRYPOINT to define the main command that should always run.
+Use CMD to provide default arguments or to specify a command that can be overridden at runtime.
+They can be used together, where ENTRYPOINT is the main command and CMD provides default arguments.
