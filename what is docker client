@@ -1,3 +1,4 @@
 The Docker client is a command-line tool that allows you to interact with Docker, which is a platform for developing, shipping, and running applications in containers.
 In simple terms, the Docker client lets you run commands to create, manage, and control your containers and images.
-You can think of it as the interface through which you communicate with the Docker engine to perform tasks like building applications, running them, and managing their lifecycle.
+You can think of it as the interface through which you communicate with the Docker engine to perform tasks like building applications,
+running them, and managing their lifecycle.
